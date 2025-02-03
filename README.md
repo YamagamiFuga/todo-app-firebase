@@ -1,3 +1,12 @@
+# ゴール
+Firebase理解のため簡易Todoアプリ開発
+→FirestoreとAuthentication（オーセンティケーション）を使用
+
+
+
+
+
+----------------------------------------------------------------------------------
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
