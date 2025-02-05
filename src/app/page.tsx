@@ -1,7 +1,14 @@
 //todoの中身
-import { redirect } from "next/navigation";
+"use client";
+import { authcheck } from "./utils/authcheck";
 
 export default function Home() {
-    redirect("/login");
-    return null;
-}
+
+    authcheck();
+
+    return (
+        <h1>todo</h1>
+    );
+
+
+};

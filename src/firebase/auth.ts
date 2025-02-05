@@ -1,8 +1,7 @@
 import app  from "@/firebase/firebase-config";
-import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
-
-const auth = getAuth(app);
+export const auth = getAuth(app);
 await signOut(auth);
 
 export const signupWithEmailAndPassword = async (email: string, password: string) => {
@@ -12,7 +11,6 @@ export const signupWithEmailAndPassword = async (email: string, password: string
             email,
             password
         );
-        await sendEmailVerification(userCredential.user);
 
         alert("新規登録を行いました");
         return userCredential.user;
@@ -23,12 +21,11 @@ export const signupWithEmailAndPassword = async (email: string, password: string
 
 export const signinWithEmailAndPassword = async (email: string, password: string) => {
     try {
-        const userCredential = await createUserWithEmailAndPassword(
+        const userCredential = await signInWithEmailAndPassword(
             auth,
             email,
             password
         );
-        await sendEmailVerification(userCredential.user);
 
         alert("ログインしました");
         return userCredential.user;

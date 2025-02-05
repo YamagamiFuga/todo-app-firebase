@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from 'react';
+import { useRouter } from "next/navigation";
 import { signupWithEmailAndPassword, signinWithEmailAndPassword } from '@/firebase/auth';
 
 
@@ -9,14 +10,35 @@ export default function Auth() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isSignUp, setIsSignUp] = useState(true); //isSignUp => true/false
+    const [errorMessage, setErrorMessage] = useState("");
+    const router = useRouter();
 
     //サインイン、ログインの切替
     const handleAuth = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (isSignUp) {    //true,falseの変更
-            await signupWithEmailAndPassword(email, password);
-        } else {
-            await signinWithEmailAndPassword(email, password);
+        setErrorMessage("");
+
+        if (!email || !password) {
+            alert("Emailとpasswordを入力してください");
+            return;
+        }
+        try {
+            let user = null;
+
+            if (isSignUp) {    //true,falseの変更
+                user = await signupWithEmailAndPassword(email, password);
+            } else {
+                user = await signinWithEmailAndPassword(email, password);
+            }
+
+            if (!user) {
+                throw new Error("認証エラー");
+            }
+
+            //認証成功時のみ遷移
+            router.push("/");
+        } catch (error) {
+            setErrorMessage("認証に失敗しました。もう一度試してください");
         }
     };
 
@@ -30,8 +52,11 @@ export default function Auth() {
             <div className='flex fle-col items-center justify-center min-h-screen bg-cyan-400 text-black'>
                 <div className='w-full max-w-sm p-6 bg-white rounded-md shadow-md'>
                     <h1 className='mb-5 text-2xl font-bold text-center'>
-                        {isSignUp ? "新規会員登録" : "ログイン"}
+                        {isSignUp ? "新規登録" : "ログイン"}
                     </h1>
+                    {errorMessage && (
+                    <p className="mb-4 text-sm text-red-500">{errorMessage}</p>
+                    )}
                     <form onSubmit={handleAuth}>
                         <input
                         type="email"
