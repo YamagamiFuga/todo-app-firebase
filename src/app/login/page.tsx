@@ -1,5 +1,7 @@
-import Auth from "@/conponents/auth";
-export default function login() {
+"use client";
+import Auth from "@/components/Auth";
+
+export default function Login() {
     return (
         <div>
             <Auth />
