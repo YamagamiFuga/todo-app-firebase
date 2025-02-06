@@ -2,7 +2,6 @@ import app  from "@/firebase/firebase-config";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 export const auth = getAuth(app);
-await signOut(auth);
 
 export const signupWithEmailAndPassword = async (email: string, password: string) => {
     try {
@@ -36,6 +35,7 @@ export const signinWithEmailAndPassword = async (email: string, password: string
 
 export const logOut = async () => {
     try {
+        await signOut(auth);
         alert("ログアウトしました");
     } catch (error) {
         alert("ログアウトに失敗しました");
