@@ -44,12 +44,14 @@ export default function Auth() {
 
     return (
         <div>
+            {/*header*/}
             <header className="w-full bg-cyan-200 text-black py-4 shadow-md">
             <div className="max-w-4xl mx-auto flex justify-between items-center px-6">
             <h1 className="text-2xl font-bold">とど管理</h1>
             </div>
             </header>
-            <div className='flex fle-col items-center justify-center min-h-screen bg-cyan-400 text-black'>
+            {/*body*/}
+            <div className='flex fle-col items-center justify-center min-h-screen bg-cyan-100 text-black'>
                 <div className='w-full max-w-sm p-6 bg-white rounded-md shadow-md'>
                     <h1 className='mb-5 text-2xl font-bold text-center'>
                         {isSignUp ? "新規登録" : "ログイン"}
