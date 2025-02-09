@@ -1,24 +1,19 @@
 "use client";
 
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { auth } from "@/firebase/auth";
-import { onAuthStateChanged } from "firebase/auth";
 
-export const authcheck = () => {
+export function useAuthCheck() {
     const router = useRouter();
 
-
     useEffect(() => {
-        
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
             if (!user) {
-        //ユーザーが未ログインなら login フォルダの page.tsx 
-                router.replace("/login");
+                router.push("/login");
             }
-        }
-    );
-    
-    return () => unsubscribe();
+        });
+
+        return () => unsubscribe();
     }, [router]);
-};
+}

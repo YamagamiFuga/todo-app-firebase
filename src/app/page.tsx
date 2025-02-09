@@ -1,7 +1,7 @@
 //todoの中身
 "use client";
 import { useState, useEffect } from "react";
-import { authcheck } from "./utils/authcheck";
+import { useAuthCheck } from "./utils/authcheck";
 import LogoutButton from "@/components/logout";
 import { getFirestore, collection, addDoc, doc, deleteDoc, onSnapshot } from "firebase/firestore";
 
@@ -14,7 +14,7 @@ interface Todo {
 
 export default function Home() {
     //認証
-    authcheck();
+    useAuthCheck();
 
     const [tasks, setTasks] = useState<Todo[]>([]);
     const [taskName, setTaskName] = useState("");
@@ -34,7 +34,7 @@ export default function Home() {
         });
 
         return () => unsubscribe(); // クリーンアップ
-    }, []);
+    }, [db]);
 
     //タスクの追加
     const handleClickAddButton = async () => {
@@ -43,7 +43,7 @@ export default function Home() {
             return;
         }
         try {
-            const res = await addDoc(collection(db, "tasks"),{
+            await addDoc(collection(db, "tasks"),{
                 name: taskName
             });
 
@@ -68,7 +68,7 @@ export default function Home() {
             setSelectedTaskIds([]);
 
         } catch (error) {
-            console.log("タスクを削除に失敗")
+            console.log("タスクを削除に失敗", error)
         }
     };
 

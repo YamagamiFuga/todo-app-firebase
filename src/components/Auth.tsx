@@ -38,6 +38,7 @@ export default function Auth() {
             //認証成功時のみ遷移
             router.push("/");
         } catch (error) {
+            console.error("認証エラー:", error);
             setErrorMessage("認証に失敗しました。もう一度試してください");
         }
     };

@@ -14,7 +14,8 @@ export const signupWithEmailAndPassword = async (email: string, password: string
         alert("新規登録を行いました");
         return userCredential.user;
     } catch (error) {
-        alert("登録に失敗しました");
+        console.error("エラーが発生しました:", error);
+        alert("登録に失敗しました",);
     }
 };
 
@@ -29,6 +30,7 @@ export const signinWithEmailAndPassword = async (email: string, password: string
         alert("ログインしました");
         return userCredential.user;
     } catch (error) {
+        console.error("エラーが発生しました:", error);
         alert("ログインに失敗しました");
     }
 };
@@ -38,6 +40,7 @@ export const logOut = async () => {
         await signOut(auth);
         alert("ログアウトしました");
     } catch (error) {
+        console.error("エラーが発生しました:", error);
         alert("ログアウトに失敗しました");
     }
 };
