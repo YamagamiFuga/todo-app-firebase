@@ -1,0 +1,172 @@
+html,body {
+    font-family: "Avenir Next";
+    background-color: aliceblue;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: rgb(255, 255, 255);
+    height: 85px;
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid rgba(10, 1, 1, 0.231);
+    margin-bottom: 30px;
+}
+
+.header-container {
+    display: flex;
+}
+
+.header-logo {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-icon {
+    width: 60px;
+    height: 50px;
+    margin-top: 20px;
+    margin-left: 10px;
+    display: flex;
+}
+
+.header-logo h1 {
+    font-size: 32px;
+    font-weight: bold;
+    color: rgb(92, 88, 88);
+    padding-top: 20px;  
+}
+.header-logo p {
+    float: left;
+    font-size: 10px;
+    color:#191010;
+    display: block;
+}
+
+.logout {
+    padding: 25px 20px;
+    font-size: 20px;
+}
+
+.main-container {
+    background-color: rgba(235, 226, 226, 0.416);
+    margin: 0 auto;
+    padding: 20px;
+    width: 600px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.contents {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.text-form {
+    width: 70%;
+    color:#191010;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #191010;
+    border-radius: 5px;
+}
+
+.button {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #a9a9a9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #808080;
+}
+
+.tag-list {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.tasks-list {
+    color:#191010;
+    list-style: none;
+    text-align: left;
+    background: white;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.tasks-list label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.delete-botton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #a9a9a9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-botton:hover {
+    background-color: #808080;
+}
+
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+footer {
+    background-color: white;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-top: 2px solid rgba(10, 1, 1, 0.231);
+    position: relative;
+    bottom: 0;
+    margin-top: 30px;
+    padding: 10px 0;
+}
+
+.footer-logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(92, 88, 88);
+}
+
+footer h2 {
+    font-size: 14px;
+    color: #555;
+    margin-top: 5px;
+}

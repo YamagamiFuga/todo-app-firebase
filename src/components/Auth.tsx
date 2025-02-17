@@ -1,19 +1,18 @@
-//サインインサインアップの
 "use client";
 
 import { useState } from 'react';
 import { useRouter } from "next/navigation";
 import { signupWithEmailAndPassword, signinWithEmailAndPassword } from '@/firebase/auth';
-
+import "./auth.css";
 
 export default function Auth() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isSignUp, setIsSignUp] = useState(true); //isSignUp => true/false
+    const [isSignUp, setIsSignUp] = useState(true); 
     const [errorMessage, setErrorMessage] = useState("");
     const router = useRouter();
 
-    //サインイン、ログインの切替
+    // サインイン・ログインの切替
     const handleAuth = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setErrorMessage("");
@@ -24,18 +23,14 @@ export default function Auth() {
         }
         try {
             let user = null;
-
-            if (isSignUp) {    //true,falseの変更
+            if (isSignUp) {    
                 user = await signupWithEmailAndPassword(email, password);
             } else {
                 user = await signinWithEmailAndPassword(email, password);
             }
-
             if (!user) {
                 throw new Error("認証エラー");
             }
-
-            //認証成功時のみ遷移
             router.push("/");
         } catch (error) {
             console.error("認証エラー:", error);
@@ -44,53 +39,55 @@ export default function Auth() {
     };
 
     return (
-        <div>
+        <div id="auth-container">
             {/*header*/}
-            <header className="w-full bg-cyan-200 text-black py-4 shadow-md">
-            <div className="max-w-4xl mx-auto flex justify-between items-center px-6">
-            <h1 className="text-2xl font-bold">とど管理</h1>
-            </div>
+            <header>
+                <div className="header-container">
+                    <img className="header-icon" src="https://www.kaigo-antenna.jp/uploads/illustration/main_image/1615/webp_202211_015_s.webp" alt="logo" />
+                    <div className="header-logo">
+                        <h1>とど管理</h1>
+                        <p>今日のやるべきことを確認しよう！</p>
+                    </div>  
+                </div>  
             </header>
-            {/*body*/}
-            <div className='flex fle-col items-center justify-center min-h-screen bg-cyan-100 text-black'>
-                <div className='w-full max-w-sm p-6 bg-white rounded-md shadow-md'>
-                    <h1 className='mb-5 text-2xl font-bold text-center'>
-                        {isSignUp ? "新規登録" : "ログイン"}
-                    </h1>
-                    {errorMessage && (
-                    <p className="mb-4 text-sm text-red-500">{errorMessage}</p>
-                    )}
+
+            {/*main*/}
+            <main className="auth-main">
+                <div className="auth-box">
+                    <h1 className="auth-title">{isSignUp ? "新規登録" : "ログイン"}</h1>
+                    {errorMessage && <p className="auth-error">{errorMessage}</p>}
                     <form onSubmit={handleAuth}>
                         <input
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(event) => setEmail(event.target.value)}
-                        className="w-full p-2 mb-4 border rounded-md focus:outline-none focus:ring focus:ring-blue-300 text-black"
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(event) => setEmail(event.target.value)}
+                            className="auth-input"
                         />
-                        <input type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)}
-                        className="w-full p-2 mb-4 border rounded-md focus:outline-none focus:ring focus:ring-blue-300 text-black"
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(event) => setPassword(event.target.value)}
+                            className="auth-input"
                         />
-                        <button
-                        type="submit"
-                        className="w-full px-4 py-2 mb-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
-                        >
+                        <button type="submit" className="auth-button">
                             {isSignUp ? "新規登録" : "ログイン"}
                         </button>
                     </form>
-                    <div className="flex justify-start mt-4">
-                        <button
-                        className="text-blue-500 hover:underline text-sm"
-                        onClick={() => setIsSignUp(!isSignUp)}  //ボタンクリックでisSignUpの切替
-                        >
+                    <div className="auth-toggle">
+                        <button onClick={() => setIsSignUp(!isSignUp)} className="auth-link">
                             {isSignUp ? "すでに登録済みの方はこちら" : "新規登録はこちら"}
                         </button>
                     </div>
                 </div>
-            </div>
-        </div>    
-        );
+            </main>
+
+            {/*footer*/}
+            <footer>
+                <div className="footer-logo">とど管理</div>
+                <h2>今日のやるべきことを確認しよう！</h2>
+            </footer>
+        </div>
+    );
 }
